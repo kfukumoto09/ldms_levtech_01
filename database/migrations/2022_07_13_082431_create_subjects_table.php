@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->integer('project_id');
-            $table->string('title');
+            $table->integer('project_id')->nullable();
+            $table->integer('sub_number')->nullable();
+            $table->string('title')->nullable();
             $table->string('objective')->nullable();
             $table->string('strategy')->nullable();
             $table->timestampsTz();
