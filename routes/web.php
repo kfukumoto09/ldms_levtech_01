@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +28,10 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/index', [ProjectController::class, 'index']);
+Route::get('/project/{project}', [ProjectController::class, 'home'])
+        ->where('project','[0-9]{0,3}');
+Route::get('/subject/{subject}', [SubjectController::class, 'home'])
+        ->where('project_id','[0-9]{0,3}')
+        ->where('subject','[0-9]{0,6}');
+        
+Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);

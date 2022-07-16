@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserCategory;  // added to show user_categories at the login session
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $user_category = new UserCategory;  // added to show user_categories at the login session
+        return view('auth.register')->with(['user_categories' => $user_category]);
     }
 
     /**
@@ -43,6 +45,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'user_category_id' => $request->user_category_id,
         ]);
 
         event(new Registered($user));

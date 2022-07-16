@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
+        Schema::create('project_user', function (Blueprint $table) {
+            // $table->string('experiment_category_id');
+            // $table->string('lab_note_id');
             $table->foreignId('project_id')->constrained('projects');
-            $table->integer('sub_number')->nullable();
-            $table->string('title')->nullable();
-            $table->string('objective')->nullable();
-            $table->string('strategy')->nullable();
-            $table->timestampsTz();
-            $table->softDeletesTz($column = 'deleted_at');
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        //
     }
 };

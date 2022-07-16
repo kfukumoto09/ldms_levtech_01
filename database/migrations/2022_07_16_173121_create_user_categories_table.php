@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('user_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained('projects');
-            $table->integer('sub_number')->nullable();
-            $table->string('title')->nullable();
-            $table->string('objective')->nullable();
-            $table->string('strategy')->nullable();
+            $table->string('name');
             $table->timestampsTz();
-            $table->softDeletesTz($column = 'deleted_at');
         });
     }
 
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('user_categories');
     }
 };
