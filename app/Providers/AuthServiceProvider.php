@@ -25,6 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // User categoryに応じた処理分け
+        Gate::define('isPlayer',function($user){
+           return $user->user_category_id == 1; // player
+        });
+        Gate::define('isManager',function($user){
+           return $user->user_category_id == 2; // manager
+        });
     }
 }
