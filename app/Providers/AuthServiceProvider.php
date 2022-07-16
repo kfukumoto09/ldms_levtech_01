@@ -29,7 +29,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isPlayer',function($user){
            return $user->user_category_id == 1; // player
         });
-        
         Gate::define('isManager',function($user){
            return $user->user_category_id == 2; // manager
         });

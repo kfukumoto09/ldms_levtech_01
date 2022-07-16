@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use App\Http\Models\UserCategory;  // added to show user_categories at the login session
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
