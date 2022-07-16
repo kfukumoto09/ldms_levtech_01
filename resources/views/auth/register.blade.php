@@ -44,6 +44,13 @@
                                 type="password"
                                 name="password_confirmation" required />
             </div>
+                        
+            <!-- User Category --> <!-- Manually introduced -->
+            <div>
+                <x-label for="user_category_id" :value="__('User Category')" />
+
+                <x-select id="user_category_id" class="block mt-1 w-full" name="user_category_id" :value="old('auth_level')" required autofocus />
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">

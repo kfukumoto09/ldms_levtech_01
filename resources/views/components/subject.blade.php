@@ -9,7 +9,7 @@
     }
 </style>
 
-<a href="/project/{{ $subject['project_id'] }}/{{ $subject['id'] }}">
+<a href="/subject/{{ $subject['id'] }}">
      <h3 class="title">#{{ $subject['sub_number'] }} | {{ $subject['title'] }}</h3o>
 </a> 
 <p class='date'>Updated at {{ $subject['updated_at'] }};    Created at {{ $subject['created_at'] }}</p>

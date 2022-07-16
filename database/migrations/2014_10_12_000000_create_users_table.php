@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // $table->foreignId('user_category_id')->constrained('user_categories');
+            $table->integer('user_category_id')->unsingned();
             $table->rememberToken();
             $table->timestamps();
         });
