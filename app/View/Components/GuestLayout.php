@@ -14,8 +14,8 @@ class GuestLayout extends Component
      */
     public function render()
     {
-        return view('layouts.guest');
-        // $user_category = new UserCategory;  // added to show user_categories at the login session
-        // return view('layouts.guest')->with(['user_categories' => $user_category]);
+        // return view('layouts.guest');
+        $user_category = new UserCategory;  // added to show user_categories at the login session
+        return view('layouts.guest')->with(['user_categories' => $user_category]);
     }
 }

@@ -21,8 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        $user_category = new UserCategory;  // added to show user_categories at the login session
-        return view('auth.register')->with(['user_categories' => $user_category]);
+        $user_categories = UserCategory::all();  // added to show user_categories at the login session
+        return view('auth.register')->with(['user_categories' => $user_categories]);
     }
 
     /**

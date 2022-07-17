@@ -30,7 +30,7 @@
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
 
-                <x-input id="password" class="block mt-1 w-full"
+                <x-input id="password" class="block mt-1 w-full"    
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
@@ -46,12 +46,14 @@
             </div>
                         
             <!-- User Category --> <!-- Manually introduced -->
-            <div>
+            <div class="mt-4">
                 <x-label for="user_category_id" :value="__('User Category')" />
 
-                <x-select id="user_category_id" class="block mt-1 w-full" 
-                                name="user_category_id" 
-                                :value="old('auth_level')" required autofocus />
+                <x-select id="user_category_id" 
+                                class="block mt-1 w-full" 
+                                name="user_category_id"
+                                :user-categories="$user_categories"
+                                :value="old('name')" required autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">
