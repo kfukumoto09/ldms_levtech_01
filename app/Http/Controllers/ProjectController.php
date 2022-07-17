@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse ;
+use Illuminate\Http\RedirectResponse;
+// use App\Http\Requests\ProjectRequest;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\ProjectUser;
 use Gate;
 
 class ProjectController extends Controller
@@ -18,7 +20,33 @@ class ProjectController extends Controller
     
     public function home(Project $project) 
     {
+        //dd($project);
         return view('projects/project')->with(['project' => $project]);
+    }
+    
+    public function create()
+    {
+        return view('projects/create-project');
+    }
+    
+    public function store(Request $request, Project $project, ProjectUser $project_user)
+    {
+        /*
+        Main process | saving
+        */
+        $input = $request['project'];
+        //dd($input);
+        $project->fill($input)->save();
+        
+        /*
+        Authorization using the intermediate table (project_user)
+        */
+        $ls_intermediate = ["project_id" => $project->id, 
+                            "user_id" => \Auth::user()->id];
+        // $project_user = ProjectUser::create($ls_intermediate);
+        $project_user->fill($ls_intermediate)->save();
+        
+        return redirect('index');
     }
     
     public function destroy(Project $project)

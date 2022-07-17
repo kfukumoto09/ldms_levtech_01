@@ -28,9 +28,11 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/index', [ProjectController::class, 'index']);
-Route::get('/project/{project}', [ProjectController::class, 'home'])
+Route::get('/projects/{project}', [ProjectController::class, 'home'])
         ->where('project','[0-9]{0,3}');
-Route::get('/subject/{subject}', [SubjectController::class, 'home'])
+Route::get('/projects/create', [ProjectController::class, 'create']);
+Route::post('/projects', [ProjectController::class, 'store']);
+Route::get('/subjects/{subject}', [SubjectController::class, 'home'])
         ->where('project_id','[0-9]{0,3}')
         ->where('subject','[0-9]{0,6}');
         
