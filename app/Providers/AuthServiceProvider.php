@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Auth\Access\Response;  // for Gate Responce
 use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use App\Models\Project;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Project' => 'App\Policies\ProjectPolicy',
     ];
 
     /**
@@ -24,13 +27,36 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        // User categoryに応じた処理分け
-        Gate::define('isPlayer',function($user){
-           return $user->user_category_id == 1; // player
+        
+        /*
+        All authorities for administrators
+        */
+        Gate::before(function ($user, $ability) {
+            if ($user->isAdmin()) {
+                return true;
+            }
         });
-        Gate::define('isManager',function($user){
-           return $user->user_category_id == 2; // manager
+
+        /*
+        User categoryに応じた処理分け
+        */
+        Gate::define('isPlayer', function(User $user){
+           return $user->category->id == 1; // player
+        });
+        Gate::define('isManager',function(User $user){
+           return $user->category->id == 2; // manager
+        });
+        Gate::define('isAdministrator',function(User $user){
+           return $user->category->id == 3; // administrator
+        });
+        
+        /*
+        relationship between projects and users
+        */
+        Gate::define('isAuthorizedFor',function(User $user, Project $project){
+           return in_array($project, $user->authorized_projects) // project_user_tableを介してuserにそのprojectを見る権限が与えられていればtrue
+                        ? Response::allow()
+                        : Response::deny('You do not own this post.');
         });
     }
 }

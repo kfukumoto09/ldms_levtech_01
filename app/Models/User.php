@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;  // for relationship
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Project;
+use App\Models\UserCategory;
 
 class User extends Authenticatable
 {
@@ -42,4 +45,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    // admin
+    public function isAdmin()
+    {
+        return $this->category->name == "Administrator";
+    }
+    
+    // relationships
+    public function category()
+    {
+        return $this->belongsTo(UserCategory::class, 'user_category_id');
+    }
+    
+    public function authorized_projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+    
+    public function test($user)
+    {
+        dd(\Auth::user()->authorized_projects);
+    }
 }

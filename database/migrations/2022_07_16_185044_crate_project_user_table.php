@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('project_user', function (Blueprint $table) {
-            // $table->string('experiment_category_id');
-            // $table->string('lab_note_id');
-            $table->foreignId('project_id')->constrained('projects');
-            $table->foreignId('user_id')->constrained('users');
+            $table->string('project_id');
+            $table->string('user_id');
+            //$table->foreignId('project_id')->constrained('projects');
+            //$table->foreignId('user_id')->constrained('users');
         });
     }
 
