@@ -13,5 +13,5 @@
      <h3 class="title">#{{ $project['id'] }} | {{ $project['title'] }}</h3o>
 </a> <br>
 <p class='date'>Updated at {{ $project['updated_at'] }};    Created at {{ $project['created_at'] }}</p>
-<br>
+
 <!--<p class="body">{{ $project['purpose'] }}</p>-->

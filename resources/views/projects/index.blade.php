@@ -12,9 +12,21 @@
             LDMS (Laboratory Data Management System) is a application to manage lab notes and experimental data.
         </p>
     </div>
+    
+
     <div class="container-md">
         @each('components.project', $projects, 'project')
     </div>
+    
+    @can('isAdmin')
+        <form method="POST" action="/projects/{{ $projects->first()->id }}">
+        	@method('delete')
+        	@csrf
+        	<button type="submit" class="btn btn-danger">delete</button>
+    	</form>
+    @else
+        <p>-- This content is displayed only for administrators</p>
+    @endcan
 
 </x-app-layout>
 

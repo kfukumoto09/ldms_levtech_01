@@ -31,6 +31,13 @@ class UserSeeder extends Seeder
             'user_category_id' => 2,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
+                ], [
+            'name' => 'Paulos',
+            'email' => 'test3@test.jp',
+            'password' => bcrypt('huxG4oLLR@oADE'),
+            'user_category_id' => 3,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
                 ],
             ]);
     }
