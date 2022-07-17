@@ -18,6 +18,10 @@
         @each('components.project', $projects, 'project')
     </div>
     
+    <div class="container-md">
+        <a href="/projects/create">Create a new project</a><br>
+    </div>
+    
     @can('isAdmin')
         <form method="POST" action="/projects/{{ $projects->first()->id }}">
         	@method('delete')
@@ -25,7 +29,7 @@
         	<button type="submit" class="btn btn-danger">delete</button>
     	</form>
     @else
-        <p>-- This content is displayed only for administrators</p>
+        <p>-- This content is displayed only for administrators. --</p>
     @endcan
 
 </x-app-layout>
