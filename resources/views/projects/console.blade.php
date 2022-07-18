@@ -13,6 +13,10 @@
         </p>
     </div>
     
+    <div class="container-md">
+        @each('components.user', $users, 'user')
+    </div>
+    
     @can('isManager')
         <div class="container-md">
            <a href="/register">Create a new user</a><br>

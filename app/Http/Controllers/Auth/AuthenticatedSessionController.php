@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use App\Http\Models\UserCategory;  // added to show user_categories at the login session
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +35,9 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (\Auth::user()->can('create')) {
-            return redirect('console');
+            $users = new User;
+            dd( $users );
+            return redirect('console')->with('users' => User:all()->get());
         } else {
             return redirect()->intended(RouteServiceProvider::HOME);
         };

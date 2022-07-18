@@ -37,13 +37,13 @@
             </div>
 
             <!-- Confirm Password -->
-            <!--<div class="mt-4">-->
-            <!--    <x-label for="password_confirmation" :value="__('Confirm Password')" />-->
+            <div class="mt-4">
+                <x-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <!--    <x-input id="password_confirmation" class="block mt-1 w-full"-->
-            <!--                    type="password"-->
-            <!--                    name="password_confirmation" required />-->
-            <!--</div>-->
+                <x-input id="password_confirmation" class="block mt-1 w-full"
+                                type="password"
+                                name="password_confirmation" required />
+            </div>
                         
             <!-- User Category --> <!-- Manually introduced -->
             <div class="mt-4">
@@ -52,20 +52,20 @@
                 <x-select id="user_category_id" 
                                 class="block mt-1 w-full" 
                                 name="user_category_id"
-                                :user-categories="$user_categories"
+                                :collection="$user_categories"
                                 :value="old('name')" required autofocus />
             </div>
             
-            <!-- Managers --> <!-- Manually introduced -->
-            <!--<div class="mt-4">-->
-            <!--    <x-label for="manager" :value="__('Managed by')" />-->
+            <!-- Managers --> <!-- Manually introduced --> 
+            <div class="mt-4">
+                <x-label for="manager" :value="__('Managed by')" />
 
-            <!--    <x-select id="manager" -->
-            <!--                    class="block mt-1 w-full" -->
-            <!--                    name="managed_by"-->
-            <!--                    :managers="$managers"-->
-            <!--                    :value="old('name')" autofocus />-->
-            <!--</div>-->
+                <x-select id="manager" 
+                                class="block mt-1 w-full" 
+                                name="managed_by"
+                                :collection="$managers"
+                                :value="old('name')" autofocus />
+            </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">

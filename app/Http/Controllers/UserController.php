@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Users;
 use App\Models\ProjectUser;
 use App\Models\User;
+use App\Models\Project;
 use Gate;
 
 class UserController extends Controller
@@ -52,19 +53,21 @@ class UserController extends Controller
     public function console()
     {
         Gate::authorize('isAdministrator');
-        $user = \Auth::user();
+        $me = \Auth::user();
+        $user = new User;
         return view('projects/console')
-            ->with(['projects' => $user->authorized_projects,
-                    'users' => $user->authorized_users]);
+            ->with(['projects' => $me->authorized_projects,
+                    'users' => $user->get()]);
     }
     
     public function edit_manager()
     {
         Gate::authorize('isAdministrator');
-        $user = \Auth::user();
+        $project = new Project;
+        $user = new User;
         return view('projects/authorize')
-            ->with(['projects' => $user->authorized_projects,
-                    'users' => $user->authorized_users]);
+            ->with(['projects' => $project->get(),
+                    'users' => $user->get_managers()]);
     }
     
     public function update_manager(Request $request)
