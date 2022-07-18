@@ -8,6 +8,7 @@ class Select extends Component
 {
     // register画面にuser_categoryのselect boxを表示させるための変数
     public $userCategories;
+    //public $managers;
     
     /**
      * Create a new component instance.
@@ -17,6 +18,7 @@ class Select extends Component
     public function __construct($userCategories)
     {
         $this->userCategories = $userCategories;
+        //$this->userCategories = $managers;
     }
 
     /**

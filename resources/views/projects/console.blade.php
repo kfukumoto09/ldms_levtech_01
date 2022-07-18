@@ -2,33 +2,16 @@
     
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Index') }}
+            {{ __('Console') }}
         </h2>
     </x-slot>
 
     <div class="py-6">
-        <h3>Welcome to LDMS Cloud!</h3>
+        <h3></h3>
         <p>
-            LDMS (Laboratory Data Management System) is a application to manage lab notes and experimental data.
+            ** This is a console page for administrators. **
         </p>
     </div>
-    
-
-    <div class="container-md">
-        @each('components.project', $projects, 'project')
-    </div>
-    
-    <div class="container-md">
-        <a href="/projects/create">Create a new project</a><br>
-    </div>
-    
-    @can('higherThanManager')
-        <div class="container-md">
-           <a href="/users/authorize">Authorize projects for users</a><br>
-        </div> 
-    @else
-        <p>-- Project authorization is not displayed for your account. --</p>
-    @endcan
     
     @can('isManager')
         <div class="container-md">
@@ -36,6 +19,14 @@
         </div> 
     @else
         <p>-- User registration is not authorized for your account. --</p>
+    @endcan
+    
+    @can('isManager')
+        <div class="container-md">
+           <a href="/console/authorize">Authorize projects for managers</a><br>
+        </div> 
+    @else
+        <p>-- Manager authorization is not displayed for your account. --</p>
     @endcan
     
     {{--

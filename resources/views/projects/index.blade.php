@@ -30,7 +30,7 @@
         <p>-- Project authorization is not displayed for your account. --</p>
     @endcan
     
-    @can('isManager')
+    @can('isAdministrator')
         <div class="container-md">
            <a href="/register">Create a new user</a><br>
         </div> 

@@ -47,7 +47,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    // relationships
+    /**
+     * A function to get user_category_id from the category name (e.g. player, manager or administrator)
+     */
+    function get_category_id($key) {
+        $categories = new UserCategory;
+        return $categories->where('name', $key)->first()->id;
+    }
+    
+    /**
+     * Relationships
+     */
     public function authorized_users()
     {
         if (Gate::allows('higherThanManager')) {
@@ -67,9 +77,17 @@ class User extends Authenticatable
         return $this->belongsToMany(Project::class);
     }
     
-    
-    public function test($user)
-    {
-        dd(\Auth::user()->authorized_projects);
+    /**
+     * Functions passed to the controller
+     */
+    public function get_managers() {
+        return $this->where('user_category_id', $this->get_category_id('manager'))
+                    ->get();
     }
+    
+    
+    // public function test($user)
+    // {
+    //     dd(\Auth::user()->authorized_projects);
+    // }
 }
