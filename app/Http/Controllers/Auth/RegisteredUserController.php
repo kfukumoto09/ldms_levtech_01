@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserCategory;  // added to show user_categories at the login session
 use App\Providers\RouteServiceProvider;
+use Gate;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +22,14 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        $user_categories = UserCategory::all();  // added to show user_categories at the login session
-        return view('auth.register')->with(['user_categories' => $user_categories]);
+        Gate::authorize('isAdministrator');
+        if (\Auth::user()->can('create')) {
+            $user_categories = UserCategory::all();  // added to show user_categories at the login session
+            return view('auth.register')->with(['user_categories' => $user_categories]);
+        } else {
+            return redirect('');  // Geteで十分なのでif分岐はいらないかも
+        };
+        
     }
 
     /**
@@ -35,6 +42,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('isAdministrator');
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -50,7 +59,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
