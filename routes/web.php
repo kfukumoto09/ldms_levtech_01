@@ -37,3 +37,6 @@ Route::get('/subjects/{subject}', [SubjectController::class, 'home'])
         ->where('subject','[0-9]{0,6}');
         
 Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);
+
+Route::get('/users/authorize', [UserController::class, 'show_authorization']);
+Route::post('/users', [UserController::class, 'authorize_projects']);

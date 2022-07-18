@@ -20,12 +20,15 @@ class ProjectUserSeeder extends Seeder
             [
             'project_id' => 1,
             'user_id' => 1,
+            'authorized_by' => 2,
                 ], [
             'project_id' => 1,
             'user_id' => 2,
+            'authorized_by' => 2,
                 ], [
             'project_id' => 2,
             'user_id' => 2,
+            'authorized_by' => null,
                 ],
             ]);
     }

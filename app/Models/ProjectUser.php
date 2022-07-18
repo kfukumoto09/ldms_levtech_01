@@ -12,6 +12,7 @@ class ProjectUser extends Model
     protected $fillable = [
         'project_id',
         'user_id',
+        'authorized_by',
     ];
     
     protected $table = 'project_user';  // defaultではproject_users_tableになるため、手動で変更

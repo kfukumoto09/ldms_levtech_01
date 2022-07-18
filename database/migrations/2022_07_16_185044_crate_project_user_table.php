@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('project_user', function (Blueprint $table) {
             $table->string('project_id');
             $table->string('user_id');
+            $table->string('authorized_by')->nullable();
             //$table->foreignId('project_id')->constrained('projects');
             //$table->foreignId('user_id')->constrained('users');
         });
