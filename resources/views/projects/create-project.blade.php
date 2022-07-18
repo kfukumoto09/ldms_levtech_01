@@ -23,17 +23,7 @@
                     <p class="purpose__error" style="color:red">{{ $errors->first('project.purpose') }}</p>
                 </div>
                 
-                {{--
-                <div class="category">
-                    <p>Category</p>
-                    <select name="post[category_id]">
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                --}}
-                <button type="submit" class="btn btn-default"> Save </button>
+                <button type="submit" class="btn btn-default"> Submit </button>
             </div><!-- col-sm-8 -->
         </form>
     </div>

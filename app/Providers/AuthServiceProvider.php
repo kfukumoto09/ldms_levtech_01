@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         All authorities for administrators
         */
         Gate::before(function ($user, $ability) {
-            if ($user->isAdmin()) {
+            if ($user->category->id == 3) {
                 return true;
             }
         });
@@ -48,6 +48,9 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('isAdministrator',function(User $user){
            return $user->category->id == 3; // administrator
+        });
+        Gate::define('higherThanManager',function(User $user){
+           return $user->category->id > 1; // more than manager
         });
         
         /*

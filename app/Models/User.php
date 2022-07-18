@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;  // for relationship
+use Illuminate\Support\Facades\Gate;  // for Gate
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -46,13 +47,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    // admin
-    public function isAdmin()
+    // relationships
+    public function authorized_users()
     {
-        return $this->category->name == "Administrator";
+        if (Gate::allows('higherThanManager')) {
+            return $this->hasMany(User::class, 'authorized_by', 'id');
+        } else {
+            echo "You are not authorized user.";
+        }
     }
     
-    // relationships
     public function category()
     {
         return $this->belongsTo(UserCategory::class, 'user_category_id');
@@ -62,6 +66,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Project::class);
     }
+    
     
     public function test($user)
     {

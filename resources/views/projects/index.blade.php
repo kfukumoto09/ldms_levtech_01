@@ -22,6 +22,14 @@
         <a href="/projects/create">Create a new project</a><br>
     </div>
     
+    @can('isManager')
+        <div class="container-md">
+           <a href="/users/authorize">Authorize projects for users</a><br>
+        </div> 
+    @else
+        <p>-- Project authorization is not displayed for your account. --</p>
+    @endcan
+    
     @can('isAdmin')
         <form method="POST" action="/projects/{{ $projects->first()->id }}">
         	@method('delete')
@@ -29,7 +37,7 @@
         	<button type="submit" class="btn btn-danger">delete</button>
     	</form>
     @else
-        <p>-- This content is displayed only for administrators. --</p>
+        <p>-- Project deletion is not authorized for your account. --</p>
     @endcan
 
 </x-app-layout>

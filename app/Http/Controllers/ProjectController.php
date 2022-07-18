@@ -29,13 +29,12 @@ class ProjectController extends Controller
         return view('projects/create-project');
     }
     
-    public function store(Request $request, Project $project, ProjectUser $project_user)
+    public function store(Request $request, Project $project)
     {
         /*
         Main process | saving
         */
         $input = $request['project'];
-        //dd($input);
         $project->fill($input)->save();
         
         /*
@@ -43,8 +42,8 @@ class ProjectController extends Controller
         */
         $ls_intermediate = ["project_id" => $project->id, 
                             "user_id" => \Auth::user()->id];
-        // $project_user = ProjectUser::create($ls_intermediate);
-        $project_user->fill($ls_intermediate)->save();
+        $project_user = ProjectUser::create($ls_intermediate);
+        //$project_user->fill($ls_intermediate)->save();
         
         return redirect('index');
     }
