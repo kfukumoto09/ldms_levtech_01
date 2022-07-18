@@ -33,7 +33,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (\Auth::user()->can('create')) {
+            return redirect('console');
+        } else {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        };
+        
     }
 
     /**
