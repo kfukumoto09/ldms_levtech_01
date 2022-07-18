@@ -6,6 +6,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Auth\Access\Response;  // for Gate Responce
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
+use App\Models\UserCategory;
 use App\Models\Project;
 
 class AuthServiceProvider extends ServiceProvider
@@ -29,11 +30,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         
+        /**
+         * function to get user_category_id from the category name (e.g. player, manager or administrator)
+         */
+        function get_category_id($key) {
+            $categories = new UserCategory;
+            return $categories->where('name', $key)->first()->id;
+        }
+        
         /*
         All authorities for administrators
         */
         Gate::before(function ($user, $ability) {
-            if ($user->category->id == 3) {
+            if ($user->category->id == get_category_id('administrator')) {
                 return true;
             }
         });
@@ -42,16 +51,16 @@ class AuthServiceProvider extends ServiceProvider
         User categoryに応じた処理分け
         */
         Gate::define('isPlayer', function(User $user){
-           return $user->category->id == 1; // player
+            return $user->category->id == get_category_id('player'); // player
         });
         Gate::define('isManager',function(User $user){
-           return $user->category->id == 2; // manager
+            return $user->category->id == get_category_id('manager'); // manager
         });
         Gate::define('isAdministrator',function(User $user){
-           return $user->category->id == 3; // administrator
+            return $user->category->id == get_category_id('administrator'); // administrator
         });
         Gate::define('higherThanManager',function(User $user){
-           return $user->category->id > 1; // more than manager
+            return $user->category->id >= get_category_id('manager');; // higher than manager
         });
         
         /*

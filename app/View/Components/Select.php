@@ -6,17 +6,20 @@ use Illuminate\View\Component;
 
 class Select extends Component
 {
-    // register画面にuser_categoryのselect boxを表示させるための変数
-    public $userCategories;
+    /**
+     * select.blade.phpにdata=$optionsを渡すための変数
+     * type = collection
+     */
+    public $collection;
     
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($userCategories)
+    public function __construct($collection)
     {
-        $this->userCategories = $userCategories;
+        $this->collection = $collection;
     }
 
     /**

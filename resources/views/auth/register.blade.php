@@ -52,8 +52,19 @@
                 <x-select id="user_category_id" 
                                 class="block mt-1 w-full" 
                                 name="user_category_id"
-                                :user-categories="$user_categories"
+                                :collection="$user_categories"
                                 :value="old('name')" required autofocus />
+            </div>
+            
+            <!-- Managers --> <!-- Manually introduced --> 
+            <div class="mt-4">
+                <x-label for="manager" :value="__('Managed by')" />
+
+                <x-select id="manager" 
+                                class="block mt-1 w-full" 
+                                name="managed_by"
+                                :collection="$managers"
+                                :value="old('name')" autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">

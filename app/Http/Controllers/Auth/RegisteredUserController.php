@@ -25,7 +25,10 @@ class RegisteredUserController extends Controller
         Gate::authorize('isAdministrator');
         if (\Auth::user()->can('create')) {
             $user_categories = UserCategory::all();  // added to show user_categories at the login session
-            return view('auth.register')->with(['user_categories' => $user_categories]);
+            $user = new User;
+            return view('auth.register')
+                        ->with(['user_categories' => $user_categories,
+                                'managers' => $user->get_managers()]);
         } else {
             return redirect('');  // Geteで十分なのでif分岐はいらないかも
         };

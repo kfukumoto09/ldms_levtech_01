@@ -38,10 +38,12 @@ Route::get('/subjects/{subject}', [SubjectController::class, 'home'])
         
 Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);
 
-// relating to users
-Route::get('/users/register', [UserController::class, 'create']);
-Route::get('/users/authorize', [UserController::class, 'show_authorization']);
-Route::post('/users', [UserController::class, 'authorize_projects']);
+// users
+// Route::get('/users/register', [UserController::class, 'create']);
+Route::get('/users/authorize', [UserController::class, 'edit_player']);
+Route::post('/users', [UserController::class, 'update_player']);
 
 // console
 Route::get('/console', [UserController::class, 'console']);
+Route::get('/console/authorize', [UserController::class, 'edit_manager']);
+Route::get('/console/test', [UserController::class, 'test']);
