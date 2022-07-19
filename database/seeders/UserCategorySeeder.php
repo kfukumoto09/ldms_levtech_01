@@ -20,11 +20,11 @@ class UserCategorySeeder extends Seeder
             [
             // 'name' => 'Guest',
             //     ], [
-            'name' => 'Player', 
+            'name' => 'player', 
                 ], [
-            'name' => 'Manager',
+            'name' => 'manager',
                 ], [
-            'name' => 'Administrator', 
+            'name' => 'administrator', 
                 ],
             ]);
     }

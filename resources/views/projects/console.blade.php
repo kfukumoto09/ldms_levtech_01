@@ -14,7 +14,7 @@
     </div>
     
     <div class="container-md">
-        @each('components.user', $users, 'user')
+        @each('components.ldms.user', $users, 'user')
     </div>
     
     @can('isManager')
