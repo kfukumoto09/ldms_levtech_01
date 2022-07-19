@@ -7,6 +7,7 @@ use App\Users;
 use App\Models\ProjectUser;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\UserCategory;
 use Gate;
 
 class UserController extends Controller
@@ -87,8 +88,12 @@ class UserController extends Controller
         return view('projects/mypage');
     }
     
-    public function test()  // you ca arrange this function when you debug
+    public function test()  // you can arrange this function when you debug
     {
-        Gate::authorize('isManager');
+        
+        dd((new User)->get()->first());
+        dd(UserCategory::where('name', 'player')->first()->id);
+        $user = User::all();
+        dd($user);
     }
 }

@@ -34,8 +34,8 @@ class AuthServiceProvider extends ServiceProvider
          * function to get user_category_id from the category name (e.g. player, manager or administrator)
          */
         function get_category_id($key) {
-            $categories = new UserCategory;
-            return $categories->where('name', $key)->first()->id;
+            // $categories = new UserCategory;
+            return UserCategory::where('name', $key)->first()->id;
         }
         
         /*

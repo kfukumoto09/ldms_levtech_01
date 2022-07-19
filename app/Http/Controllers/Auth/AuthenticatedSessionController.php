@@ -34,13 +34,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (\Auth::user()->can('create')) {
-            $users = new User;
-            dd( $users );
-            return redirect('console')->with('users' => User:all()->get());
-        } else {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        };
+        return redirect('console');
+        // if (\Auth::user()->can('create')) {
+        //     $users = new User;
+        //     //dd( $users );
+        //     return redirect('console'); //->with('users' => User:all());
+        // } else {
+        //     return redirect()->intended(RouteServiceProvider::HOME);
+        // };
         
     }
 

@@ -86,8 +86,9 @@ class User extends Authenticatable
     }
     
     
-    // public function test($user)
-    // {
-    //     dd(\Auth::user()->authorized_projects);
-    // }
+//     public function test($user)
+//     {
+//         $user = new User;
+//         dd($user);
+//     }
 }

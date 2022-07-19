@@ -10,6 +10,6 @@
 </style>
 
 <a href="/console/users/{{ $user['id'] }}">
-     <h3 class="name">#{{ $user['id'] }} | {{ $user['name'] }}, {{ $user['category']}}</h3o>
+     <h3 class="name">#{{ $user['id'] }} | {{ $user['name'] }}, {{ $user['category']['name']}}</h3o>
 </a> <br>
 <p class='date'>Updated at {{ $user['updated_at'] }};    Created at {{ $user['created_at'] }}</p>
