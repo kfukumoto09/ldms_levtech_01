@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +42,13 @@ Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);
 // users
 // Route::get('/users/register', [UserController::class, 'create']);
 Route::get('/users/authorize', [UserController::class, 'edit_player']);
-Route::post('/users', [UserController::class, 'update_player']);
+// Route::post('/users', [UserController::class, 'update_player']);
+Route::post('/users/{user_id}', [UserController::class, 'update_player']);
+Route::get('/users/{user}', [UserController::class, 'show']);
 
 // console
 Route::get('/console', [UserController::class, 'console']);
 Route::get('/console/authorize', [UserController::class, 'edit_manager']);
 Route::get('/console/test', [UserController::class, 'test']);
+
+Route::resource('tests', TestController::class);

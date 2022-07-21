@@ -50,9 +50,8 @@ class User extends Authenticatable
     /**
      * A function to get user_category_id from the category name (e.g. player, manager or administrator)
      */
-    function get_category_id($key) {
-        $categories = new UserCategory;
-        return $categories->where('name', $key)->first()->id;
+    function category_id($key) {
+        return UserCategory::where('name', $key)->first()->id;
     }
     
     /**
@@ -75,19 +74,46 @@ class User extends Authenticatable
     public function authorized_projects()
     {
         return $this->belongsToMany(Project::class);
+        // dd($this->belongsToMany(Project::class));
+        // if (Gate::allows('isAdministrator')) {
+        //     dd(User::all());
+        //     return User::all();
+        // } else {
+        //     return $this->belongsToMany(Project::class);
+        // };
     }
     
     /**
      * Functions passed to the controller
      */
-    public function get_managers() {
-        return $this->where('user_category_id', $this->get_category_id('manager'))
+    public function administrators() {
+        
+        return $this->where('user_category_id', $this->category_id('administrator'))
                     ->get();
     }
     
+    public function managers() {
+        return $this->where('user_category_id', $this->category_id('manager'))
+                    ->get();
+    }
     
-    // public function test($user)
-    // {
-    //     dd(\Auth::user()->authorized_projects);
-    // }
+    public function players() {
+        return $this->where('user_category_id', $this->category_id('player'))
+                    ->get();
+    }
+    
+    public function authorized_by() {
+        return $this->belongsTo(User::class, 'authorizer_id', 'id');
+    }
+    
+    public function count() {
+        return $this->count();
+    }
+    
+    
+//     public function test($user)
+//     {
+//         $user = new User;
+//         dd($user);
+//     }
 }

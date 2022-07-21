@@ -13,7 +13,7 @@
     <p>{{ $project->purpose }}</p>
     <br>
     <div class="container-md">
-        @each('components.subject', $project->subjects, 'subject')
+        @each('components.ldms.subject', $project->subjects, 'subject')
     </div>
     {{-- $posts -> links() --}}
 @endsection

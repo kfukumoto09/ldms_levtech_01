@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'email' => 'test1@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 1,
-            'authorized_by' => 2,
+            'authorizer_id' => 2,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
                 ], [
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'email' => 'test2@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 2,
-            'authorized_by' => null,
+            'authorizer_id' => 3,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
                 ], [
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
             'email' => 'test3@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 3,
-            'authorized_by' => null,
+            'authorizer_id' => null,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
                 ], [
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
             'email' => 'test4@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 1,
-            'authorized_by' => 2,
+            'authorizer_id' => 2,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
                 ], 

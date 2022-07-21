@@ -33,16 +33,15 @@ class AuthServiceProvider extends ServiceProvider
         /**
          * function to get user_category_id from the category name (e.g. player, manager or administrator)
          */
-        function get_category_id($key) {
-            $categories = new UserCategory;
-            return $categories->where('name', $key)->first()->id;
+        function category_id($key) {
+            return UserCategory::where('name', $key)->first()->id;
         }
         
         /*
         All authorities for administrators
         */
         Gate::before(function ($user, $ability) {
-            if ($user->category->id == get_category_id('administrator')) {
+            if ($user->category->id == category_id('administrator')) {
                 return true;
             }
         });
@@ -51,16 +50,16 @@ class AuthServiceProvider extends ServiceProvider
         User categoryに応じた処理分け
         */
         Gate::define('isPlayer', function(User $user){
-            return $user->category->id == get_category_id('player'); // player
+            return $user->category->id == category_id('player'); // player
         });
         Gate::define('isManager',function(User $user){
-            return $user->category->id == get_category_id('manager'); // manager
+            return $user->category->id == category_id('manager'); // manager
         });
         Gate::define('isAdministrator',function(User $user){
-            return $user->category->id == get_category_id('administrator'); // administrator
+            return $user->category->id == category_id('administrator'); // administrator
         });
         Gate::define('higherThanManager',function(User $user){
-            return $user->category->id >= get_category_id('manager');; // higher than manager
+            return $user->category->id >= category_id('manager');; // higher than manager
         });
         
         /*

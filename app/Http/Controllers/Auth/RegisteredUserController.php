@@ -28,9 +28,9 @@ class RegisteredUserController extends Controller
             $user = new User;
             return view('auth.register')
                         ->with(['user_categories' => $user_categories,
-                                'managers' => $user->get_managers()]);
+                                'managers' => $user->managers()]);
         } else {
-            return redirect('');  // Geteで十分なのでif分岐はいらないかも
+            return redirect('index');  // Geteで十分なのでif分岐はいらないかも
         };
         
     }

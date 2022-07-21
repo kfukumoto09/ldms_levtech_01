@@ -7,7 +7,7 @@
     </x-slot>
 
     <div class="py-6">
-        <h3>Welcome to LDMS Cloud!</h3>
+        <p class="text-3xl">Welcome to LDMS Cloud!</p>
         <p>
             LDMS (Laboratory Data Management System) is a application to manage lab notes and experimental data.
         </p>

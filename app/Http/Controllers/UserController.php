@@ -7,6 +7,7 @@ use App\Users;
 use App\Models\ProjectUser;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\UserCategory;
 use Gate;
 
 class UserController extends Controller
@@ -57,7 +58,7 @@ class UserController extends Controller
         $user = new User;
         return view('projects/console')
             ->with(['projects' => $me->authorized_projects,
-                    'users' => $user->get()]);
+                    'user' => $user]);
     }
     
     public function edit_manager()
@@ -87,8 +88,19 @@ class UserController extends Controller
         return view('projects/mypage');
     }
     
-    public function test()  // you ca arrange this function when you debug
+    public function show(User $user) 
     {
-        Gate::authorize('isManager');
+        //dd( $user->authorized_projects()->get() );
+        return view('users/show')->with(['user' => $user]);
+    }
+    
+    
+    public function test()  // you can arrange this function when you debug
+    {
+        
+        dd((new User)->get()->first());
+        dd(UserCategory::where('name', 'player')->first()->id);
+        $user = User::all();
+        dd($user);
     }
 }
