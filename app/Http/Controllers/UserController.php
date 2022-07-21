@@ -58,7 +58,7 @@ class UserController extends Controller
         $user = new User;
         return view('projects/console')
             ->with(['projects' => $me->authorized_projects,
-                    'users' => $user->get()]);
+                    'user' => $user]);
     }
     
     public function edit_manager()
@@ -87,6 +87,13 @@ class UserController extends Controller
         Gate::authorize('isManager');
         return view('projects/mypage');
     }
+    
+    public function show(User $user) 
+    {
+        //dd( $user->authorized_projects()->get() );
+        return view('users/show')->with(['user' => $user]);
+    }
+    
     
     public function test()  // you can arrange this function when you debug
     {

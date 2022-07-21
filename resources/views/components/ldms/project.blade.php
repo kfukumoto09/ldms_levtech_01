@@ -1,17 +1,5 @@
-<style>
-    .title {
-        font-size: 14pt;
-    }
-    .date {
-        font-weight: light;
-        color: #111;
-        font-size: 12pt;
-    }
-</style>
-
 <a href="/projects/{{ $project['id'] }}">
-     <h3 class="title">#{{ $project['id'] }} | {{ $project['title'] }}</h3o>
-</a> <br>
-<p class='date'>Updated at {{ $project['updated_at'] }};    Created at {{ $project['created_at'] }}</p>
-
-<!--<p class="body">{{ $project['purpose'] }}</p>-->
+     <p>{{ $project['title'] }}</p>
+</a> 
+<p class='text-xs'>Registered with the id: {{ $project['id'] }}</p>
+<p class='text-xs'>Updated at {{ $project['updated_at'] }}; Created at {{ $project['created_at'] }}</p>

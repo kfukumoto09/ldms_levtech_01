@@ -5,20 +5,44 @@
             {{ __('Console') }}
         </h2>
     </x-slot>
+    
+    
+    <!--Body-->
 
-    <div class="py-6">
-        <h3></h3>
-        <p>
-            ** This is a console page for administrators. **
-        </p>
+    <div class="py-2    ">
+        <h1>** This is a console page for administrators. **</h1>
     </div>
     
-    <div class="container-md">
-        @each('components.ldms.user', $users, 'user')
+    <div class="py-2">
+        <p>Following users have been registered:</p>
+        <p>- {{ $user->administrators()->count() }} administrators</p>
+        <p>- {{ $user->managers()->count() }} managers</p>
+        <p>- {{ $user->players()->count() }} players</p>
+    </div>
+    
+    <div class='py-2'>
+        <h2>Administrator(s)</h2>
+        <div class="py-1">
+            @each('components.ldms.user', $user->administrators(), 'user')
+        </div>
+    </div>
+    
+    <div class='py-2'>
+        <h2>Manager(s)</h2>
+        <div class="py-1">
+            @each('components.ldms.user', $user->managers(), 'user')
+        </div>
+    </div>
+    
+    <div class='py-2'>
+        <h2>Player(s)</h2>
+        <div class="py-1">
+            @each('components.ldms.user', $user->players(), 'user')
+        </div>
     </div>
     
     @can('isManager')
-        <div class="container-md">
+        <div class="py-1">
            <a href="/register">Create a new user</a><br>
         </div> 
     @else
@@ -26,27 +50,12 @@
     @endcan
     
     @can('isManager')
-        <div class="container-md">
+        <div class="">
            <a href="/console/authorize">Authorize projects for managers</a><br>
         </div> 
     @else
         <p>-- Manager authorization is not displayed for your account. --</p>
     @endcan
-    
-    {{--
-    @can('isAdmin')
-        <div class="container-md">
-           <a href="/users/create">Create a new user</a><br>
-        </div>
-        <form method="POST" action="/projects/{{ $projects->first()->id }}">
-        	@method('delete')
-        	@csrf
-        	<button type="submit" class="btn btn-danger">delete</button>
-    	</form>
-    @else
-        <p>-- Project deletion is not authorized for your account. --</p>
-    @endcan
-    --}}
 
 </x-app-layout>
 

@@ -86,9 +86,28 @@ class User extends Authenticatable
     /**
      * Functions passed to the controller
      */
-    public function get_managers() {
+    public function administrators() {
+        
+        return $this->where('user_category_id', $this->category_id('administrator'))
+                    ->get();
+    }
+    
+    public function managers() {
         return $this->where('user_category_id', $this->category_id('manager'))
                     ->get();
+    }
+    
+    public function players() {
+        return $this->where('user_category_id', $this->category_id('player'))
+                    ->get();
+    }
+    
+    public function authorized_by() {
+        return $this->belongsTo(User::class, 'authorizer_id', 'id');
+    }
+    
+    public function count() {
+        return $this->count();
     }
     
     

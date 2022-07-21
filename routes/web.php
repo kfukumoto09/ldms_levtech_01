@@ -44,6 +44,7 @@ Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);
 Route::get('/users/authorize', [UserController::class, 'edit_player']);
 // Route::post('/users', [UserController::class, 'update_player']);
 Route::post('/users/{user_id}', [UserController::class, 'update_player']);
+Route::get('/users/{user}', [UserController::class, 'show']);
 
 // console
 Route::get('/console', [UserController::class, 'console']);

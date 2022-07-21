@@ -1,7 +1,6 @@
-<a href="/console/users/{{ $user['id'] }}">
-     <p class="">{{ $user['id'] }} | {{ $user['name'] }}</p>
+<a href="/users/{{ $user['id'] }}">
+     <p>{{ $user['name'] }}</p>
 </a> 
-
-<p>{{ $user['category']['name']}}</p> 
-
-<p class='date'>Updated at {{ $user['updated_at'] }};    Created at {{ $user['created_at'] }}</p>
+<p class='text-xs'>Registered with the id: {{ $user['id'] }}</p>
+<!--<p>{{ $user['category']['name']}}</p> -->
+<p class='text-xs'>Updated at {{ $user['updated_at'] }}; Created at {{ $user['created_at'] }}</p>
