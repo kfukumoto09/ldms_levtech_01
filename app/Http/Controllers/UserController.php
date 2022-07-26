@@ -18,7 +18,7 @@ class UserController extends Controller
         $user = \Auth::user();
         return view('projects/authorize')
             ->with(['projects' => $user->authorized_projects,
-                    'users' => $user->authorized_users]);
+                    'users' => $user->authorizing_users]);
     }
     
     public function update_player(Request $request)
@@ -90,17 +90,13 @@ class UserController extends Controller
     
     public function show(User $user) 
     {
-        //dd( $user->authorized_projects()->get() );
         return view('users/show')->with(['user' => $user]);
     }
     
     
     public function test()  // you can arrange this function when you debug
     {
-        
-        dd((new User)->get()->first());
-        dd(UserCategory::where('name', 'player')->first()->id);
         $user = User::all();
-        dd($user);
+        return view('projects.console')->with(['user'=>new User]);
     }
 }

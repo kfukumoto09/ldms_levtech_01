@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Project;
+use App\Models\Subject;
 
-class Subject extends Model
+class LabNote extends Model
 {
     use HasFactory;
     
-    public function project() 
+    public function subject()
     {
         return $this->belongsTo(Subject::class);
     }

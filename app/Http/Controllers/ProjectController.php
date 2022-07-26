@@ -18,10 +18,9 @@ class ProjectController extends Controller
                                             'user' => $user]);
     }
     
-    public function home(Project $project) 
+    public function show(Project $project) 
     {
-        //dd($project);
-        return view('projects/project')->with(['project' => $project]);
+        return view('projects/show')->with(['project' => $project]);
     }
     
     public function create()

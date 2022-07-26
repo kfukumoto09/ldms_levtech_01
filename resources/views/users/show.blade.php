@@ -10,7 +10,7 @@
     <!--Body-->
     <div>
         <p>Account status:</p>
-        <p>- {{ $user->category->first()->name }}'s authority </p>
+        <p>- {{ $user->category->name }}'s authority </p>
         <p>- {{ $user->authorized_projects->count() }} authorized projects.</p>
         @if( $user->category->name == 'player' )
             <p>- managed by {{ $user->authorized_by->name }} </p>
@@ -26,22 +26,15 @@
             @each('components.ldms.project', $user->authorized_projects, 'project')
         </div>
     </div>
-
-</x-app-layout>
-
-
-{{--
-@extends('layouts.master')
-
-@section('title', 'LDMS Cloud')
-
-@section('content')
-    <h1>Welcome to LDMS Cloud!</h1>
-    <p>
-        LDMS (Laboratory Data Management System) is a application to manage lab notes and experimental data.
-    </p>
-    <div class="container-md">
-        @each('components.project', $projects, 'project')
+    
+    <div class='py-2'>
+        @can('isAdministrator')
+            <a href='/console'>
+                Return to the console
+            </a>
+        @else
+            <p class='caution'>-- Console is not authorized for your account.</p>
+        @endcan
     </div>
-@endsection
---}}
+    
+</x-app-layout>
