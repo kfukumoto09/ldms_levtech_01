@@ -7,9 +7,9 @@ use App\Models\Subject;
 
 class SubjectController extends Controller
 {
-    public function home(Subject $subject) 
+    public function show(Subject $subject) 
     {
         // $subject = new Subject;
-        return view('projects/subject')->with(['subject' => $subject]);
+        return view('subjects/show')->with(['subject' => $subject]);
     }
 }

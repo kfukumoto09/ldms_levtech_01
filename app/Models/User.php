@@ -57,10 +57,10 @@ class User extends Authenticatable
     /**
      * Relationships
      */
-    public function authorized_users()
+    public function authorizing_users()
     {
         if (Gate::allows('higherThanManager')) {
-            return $this->hasMany(User::class, 'authorized_by', 'id');
+            return $this->hasMany(User::class, 'authorizer_id', 'id');
         } else {
             echo "You are not authorized user.";
         }

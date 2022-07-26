@@ -38,7 +38,7 @@ class AuthenticatedSessionController extends Controller
         if (\Auth::user()->can('create')) {
             return redirect()->intended('/console');
         } else {
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended('/projects/index');  // もともとは->intended(RouteServiceProvider::HOME)
         };
     }
 

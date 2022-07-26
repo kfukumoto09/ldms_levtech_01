@@ -9,7 +9,7 @@
     
     <!--Body-->
 
-    <div class="py-2    ">
+    <div class="py-2">
         <h1>** This is a console page for administrators. **</h1>
     </div>
     
@@ -46,7 +46,7 @@
            <a href="/register">Create a new user</a><br>
         </div> 
     @else
-        <p>-- User registration is not authorized for your account. --</p>
+        <p class='caution'>-- User registration is not authorized for your account. --</p>
     @endcan
     
     @can('isManager')
@@ -54,24 +54,7 @@
            <a href="/console/authorize">Authorize projects for managers</a><br>
         </div> 
     @else
-        <p>-- Manager authorization is not displayed for your account. --</p>
+        <p class='caution'>-- Manager authorization is not displayed for your account. --</p>
     @endcan
 
 </x-app-layout>
-
-
-{{--
-@extends('layouts.master')
-
-@section('title', 'LDMS Cloud')
-
-@section('content')
-    <h1>Welcome to LDMS Cloud!</h1>
-    <p>
-        LDMS (Laboratory Data Management System) is a application to manage lab notes and experimental data.
-    </p>
-    <div class="container-md">
-        @each('components.project', $projects, 'project')
-    </div>
-@endsection
---}}

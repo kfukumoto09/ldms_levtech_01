@@ -2,11 +2,11 @@
     
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Index') }}
+            {{ __('Projects') }}
         </h2>
     </x-slot>
 
-    <div class="py-6">
+    <div class="py-4">
         <p class="text-3xl">Welcome to LDMS Cloud!</p>
         <p>
             LDMS (Laboratory Data Management System) is a application to manage lab notes and experimental data.
@@ -14,8 +14,9 @@
     </div>
     
 
-    <div class="container-md">
-        @each('components.project', $projects, 'project')
+    <div class="py-2">
+        <h2>Projects</h2>
+        @each('components.ldms.project', $projects, 'project')
     </div>
     
     <div class="container-md">
@@ -35,7 +36,7 @@
            <a href="/register">Create a new user</a><br>
         </div> 
     @else
-        <p>-- User registration is not authorized for your account. --</p>
+        <p class='caution'>-- User registration is not authorized for your account. --</p>
     @endcan
     
     {{--
