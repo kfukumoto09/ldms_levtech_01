@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('lab_notes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('subject_id')->constrained('subjects');
-            $table->string('preparation')->nullable;
-            $table->string('method');
-            $table->date('performed_at');
+            $table->string('preparation')->nullable();
+            $table->string('methods');
+            $table->date('performed_at')->nullable();
             $table->timestampsTz();
             $table->softDeletesTz($column = 'deleted_at');
         });
