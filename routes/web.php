@@ -43,7 +43,7 @@ Route::get('/subjects/{subject}', [SubjectController::class, 'show'])
 
 // create
 Route::get('/create/note/subjects/{subject}', [LabNoteController::class, 'create']);
-
+Route::post('/create/note/subject-1', [LabNoteController::class, 'store']);
         
 Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);
 

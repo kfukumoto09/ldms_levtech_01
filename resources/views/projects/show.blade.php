@@ -9,7 +9,7 @@
     
     <!--Body-->
 
-    <div class='py-2'>
+    <div class='my-5'>
         <p class='text-sm'>Project ID: {{ $project->id }}</p>
         <p class='text-xs'>
             Created at {{ $project['created_at'] }}<br> 

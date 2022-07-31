@@ -10,6 +10,11 @@ class LabNote extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'subject_id',
+        'methods',
+    ];
+    
     public function subject()
     {
         return $this->belongsTo(Subject::class);
