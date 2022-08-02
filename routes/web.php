@@ -42,10 +42,12 @@ Route::get('/subjects/{subject}', [SubjectController::class, 'show'])
             ->name('subjects.show');
 
 // create
-Route::get('/create/note/subjects/{subject}', [LabNoteController::class, 'create']);
-Route::post('/create/note/subject-{subject_id}', [LabNoteController::class, 'store']);
-        
+Route::get('/create/note/subject-{subject}', [LabNoteController::class, 'create']);
+Route::post('/create/note/subject-{fukumoto}', [LabNoteController::class, 'store']);
 Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);
+
+// edit
+Route::get('/edit/note/subject-{subject}', [LabNoteController::class, 'edit']);
 
 // users
 // Route::get('/users/register', [UserController::class, 'create']);
