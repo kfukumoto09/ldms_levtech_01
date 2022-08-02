@@ -25,8 +25,17 @@ class LabNoteController extends Controller
      */
     public function create(Subject $subject, LabNote $lab_note)
     {
+        
         $lab_note->subject_id = $subject->id;
-        return view('create.lab-note')->with(['lab_note' => $lab_note]);
+        $project = $subject->project;
+        $last_note = $subject->lab_note();
+        if ( is_null($last_note) )  {
+            $last_note = $lab_note;
+        }
+        return view('create.lab-note')->with(['lab_note' => $lab_note,
+                                            'subject' => $subject,
+                                            'project' => $project,
+                                            'last_note' => $last_note]);
     }
 
     /**
@@ -38,10 +47,8 @@ class LabNoteController extends Controller
     public function store(Request $request, $id, LabNote $lab_note)
     {
         $input = $request['lab_note'];
-        dd( $id );
-        // $input += array('subject_id' => 1);
+        // dd( $id ); // Note: rootを '.../subject-{SMTH}' とした場合、$idでrootのtextを取得できる。今は使っていないが、記録のために残しておく。
         $lab_note->fill($input)->save();
-        // dd($lab_note);
         return redirect('/subjects/' . $lab_note->subject_id);
     }
 
@@ -64,8 +71,7 @@ class LabNoteController extends Controller
      */
     public function edit(Subject $subject, LabNote $lab_note)
     {
-        $lab_note->subject_id = $subject->id;
-        return view('create.lab-note')->with(['lab_note' => $lab_note]);
+        return $this->create($subject, $lab_note);  // lab_noteは、更新せずにrecordを追加していく方式にしているため、editではなくcreateを行う。
     }
 
     /**
