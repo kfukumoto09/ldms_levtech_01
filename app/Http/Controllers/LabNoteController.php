@@ -39,7 +39,7 @@ class LabNoteController extends Controller
     public function store(Request $request, Subject $subject, LabNote $lab_note)
     {
         $input = $request['lab_note'];
-        $input += array('subject_id' => 1);
+        // $input += array('subject_id' => 1);
         $lab_note->fill($input)->save();
         // dd($lab_note);
         return redirect('/labnotes/' . $lab_note->id);

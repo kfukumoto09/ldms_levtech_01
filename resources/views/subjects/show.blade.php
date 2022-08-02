@@ -42,10 +42,14 @@
         <p class='text-sm'>{{ $subject->objective }}</p>
     </div>
     
-    <div class='py-2'>
-        <h2>Methods</h2>
-        <p class='text-sm'>{{ $subject->lab_notes->first()->methods }}</p>
-    </div>
+    @if(isset( $subject->lab_note ))
+        <div class='py-2'>
+            <h2>Methods</h2>
+            <p class='text-sm'>{{ $subject->lab_notes->first()->methods }}</p>
+        </div>
+    @else
+        <p class='py-2'>-- No record was registered in this subject.</p>
+    @endif
     
     <div class='py-2'>
         <a href='/create/note/subjects/{{ $subject->id }}'>
