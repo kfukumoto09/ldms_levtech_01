@@ -26,7 +26,6 @@ class LabNoteController extends Controller
     public function create(Subject $subject, LabNote $lab_note)
     {
         $lab_note->subject_id = $subject->id;
-        // dd ($lab_note->subject);
         return view('create.lab-note')->with(['lab_note' => $lab_note]);
     }
 
@@ -36,13 +35,14 @@ class LabNoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Subject $subject, LabNote $lab_note)
+    public function store(Request $request, $id, LabNote $lab_note)
     {
         $input = $request['lab_note'];
-        $input += array('subject_id' => 1);
+        dd( $id );
+        // $input += array('subject_id' => 1);
         $lab_note->fill($input)->save();
         // dd($lab_note);
-        return redirect('/labnotes/' . $lab_note->id);
+        return redirect('/subjects/' . $lab_note->subject_id);
     }
 
     /**
@@ -62,9 +62,10 @@ class LabNoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Subject $subject, LabNote $lab_note)
     {
-        //
+        $lab_note->subject_id = $subject->id;
+        return view('create.lab-note')->with(['lab_note' => $lab_note]);
     }
 
     /**

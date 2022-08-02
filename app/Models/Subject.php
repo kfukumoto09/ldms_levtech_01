@@ -20,5 +20,10 @@ class Subject extends Model
     {
         return $this->hasMany(LabNote::class);
     }
+    
+    public function lab_note() // 単数形の場合は最新 (last()) のlab_noteを取得する
+    {
+        return $this->lab_notes->last();
+    }
 }
 

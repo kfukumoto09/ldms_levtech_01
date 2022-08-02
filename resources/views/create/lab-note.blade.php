@@ -27,10 +27,14 @@
         <form id="create", action="/create/note/subject-{{ $lab_note->subject->id }}" method="POST" class="row">
             @csrf
             <div class="py-1">
+                <label for="preparation"><h2>Preparation</h2></label>
+                <textarea name="lab_note[preparation]" id="preparation" rows="4" 
+                            class='textarea w-full h-64' >{{ old('lab_note.preparation') }}</textarea>
+            </div>
+            <div class="py-1">
                 <label for="methods"><h2>Methods</h2></label>
                 <textarea name="lab_note[methods]" id="methods" rows="4" 
                             class='textarea w-full h-64' >{{ old('lab_note.methods') }}</textarea>
-                <p class="purpose__error" style="color:red">{{ $errors->first('project.purpose') }}</p>
             </div>
             <script src="../path/to/flowbite/dist/datepicker.js"></script>
                 <div class="relative">
@@ -39,7 +43,7 @@
                   </div>
                   <input datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                 </div>
-            <!--<textarea name='lab_note[subject_id]' class='textarea h-1'>{{ $lab_note->subject->id }}</textarea>-->
+            <input name='lab_note[subject_id]' class='hidden' value='{{ $lab_note->subject->id }}'/>
             <button type="submit" class="btn"> Submit </button>
         </form>
     </div>

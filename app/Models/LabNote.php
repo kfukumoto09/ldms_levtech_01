@@ -12,6 +12,7 @@ class LabNote extends Model
     
     protected $fillable = [
         'subject_id',
+        'preparation',
         'methods',
     ];
     
