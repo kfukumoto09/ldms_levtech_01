@@ -9,8 +9,8 @@
     
     <!--Body-->
     
-    <div className="grid grid-cols-3">
-        <div className="col-span-1">
+    <div class="grid grid-cols-3">
+        <div class='mx-16'>
             <div class='py-2'>
                 <input type="button" value="Details" onclick="clickBtn1()" class='detail_pulldown' />
                 <div id='details'>
@@ -37,10 +37,9 @@
                 </script>
                 
             </div>
-        </div1>
+        </div>
         
-        <div className="col-span-2">
-            
+        <div>
             <div class='py-2'>
                 <h2>Objective</h2>
                 <p class='text-sm'>{{ $subject->objective }}</p>
@@ -79,15 +78,15 @@
                     </div> 
                 @endif
             </div>
-        </div1>
+        </div>
         
-        <div className="col-span-1">
+        <div>
             <div class='py-2'>
                 <a href='/projects/{{ $subject->project->id }}'>
                     Return to the project
                 </a>
             </div>
-        </div1>
+        </div>
     </div>
 
 </x-app-layout>
