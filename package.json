@@ -18,6 +18,11 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
-        "flowbite": "^1.5.1"
+        "@types/sharedworker": "^0.0.78",
+        "add": "^2.0.6",
+        "flowbite": "^1.5.1",
+        "or": "^0.2.0",
+        "pnpm": "^7.8.0",
+        "yarn": "^1.22.19"
     }
 }
