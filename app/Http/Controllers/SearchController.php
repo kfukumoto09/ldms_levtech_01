@@ -37,7 +37,7 @@ class SearchController extends Controller
     public function find(Request $request)
     {
         $input = $request['search'];
-        $lab_notes = LabNote::with('subject.project')->get();
+        // $lab_notes = LabNote::with('subject.project')->get();
         $results = (new Subject)->search($input);
         return view('search.results', compact('results'));
     }
