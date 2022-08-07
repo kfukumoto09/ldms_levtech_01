@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LabNote;
+use App\Models\Subject;
 
 class SearchController extends Controller
 {
@@ -32,9 +34,16 @@ class SearchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function find(Request $request)
     {
-        //
+        $input = $request['search'];
+        $lab_notes = LabNote::with('subject.project')->get();
+        $subjects = Subject::with('lab_notes')->get();
+        // dd( $test->first()->lab_note() );
+        // dd ($lab_notes);
+        $results = $subjects->first()->lab_note()->where('methods', 'LIKE', $input['words'])->get();
+        // dd($results);
+        return view('search.results', compact('results'));
     }
 
     /**
