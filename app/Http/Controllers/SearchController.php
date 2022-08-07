@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\LabNote;
 use App\Models\Subject;
 
-class LabNoteController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,19 +23,9 @@ class LabNoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Subject $subject, LabNote $lab_note)
+    public function search()
     {
-        
-        $lab_note->subject_id = $subject->id;
-        $project = $subject->project;
-        $last_note = $subject->lab_note();
-        if ( is_null($last_note) )  {
-            $last_note = $lab_note;
-        }
-        return view('create.lab-note')->with(['lab_note' => $lab_note,
-                                            'subject' => $subject,
-                                            'project' => $project,
-                                            'last_note' => $last_note]);
+        return view('search.search');
     }
 
     /**
@@ -44,12 +34,16 @@ class LabNoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id, LabNote $lab_note)
+    public function find(Request $request)
     {
-        $input = $request['lab_note'];
-        // dd( $id ); // Note: rootを '.../subject-{SMTH}' とした場合、$idでrootのtextを取得できる。今は使っていないが、記録のために残しておく。
-        $lab_note->fill($input)->save();
-        return redirect('/subjects/' . $lab_note->subject_id);
+        $input = $request['search'];
+        $lab_notes = LabNote::with('subject.project')->get();
+        $subjects = Subject::with('lab_notes')->get();
+        // dd( $test->first()->lab_note() );
+        // dd ($lab_notes);
+        $results = $subjects->first()->lab_note()->where('methods', 'LIKE', $input['words'])->get();
+        // dd($results);
+        return view('search.results', compact('results'));
     }
 
     /**
@@ -69,9 +63,9 @@ class LabNoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subject $subject, LabNote $lab_note)
+    public function edit($id)
     {
-        return $this->create($subject, $lab_note);  // lab_noteは、更新せずにrecordを追加していく方式にしているため、editではなくcreateを行う。
+        //
     }
 
     /**

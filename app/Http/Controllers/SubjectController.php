@@ -10,6 +10,8 @@ class SubjectController extends Controller
     public function show(Subject $subject) 
     {
         // $subject = new Subject;
-        return view('subjects/show')->with(['subject' => $subject]);
+        $lab_note = $subject->lab_note();
+        return view('subjects/show')->with(['subject' => $subject, 
+                                            'lab_note' => $lab_note]);
     }
 }

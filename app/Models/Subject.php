@@ -13,7 +13,7 @@ class Subject extends Model
     
     public function project() 
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Project::class);
     }
     
     public function lab_notes() 

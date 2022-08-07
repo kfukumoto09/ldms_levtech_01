@@ -9,8 +9,8 @@
     
     <!--Body-->
     
-    <div className="grid grid-cols-3">
-        <div className="col-span-1">
+    <div class="grid grid-cols-3">
+        <div class='mx-16'>
             <div class='py-2'>
                 <input type="button" value="Details" onclick="clickBtn1()" class='detail_pulldown' />
                 <div id='details'>
@@ -37,17 +37,16 @@
                 </script>
                 
             </div>
-        </div1>
+        </div>
         
-        <div className="col-span-2">
-            
+        <div>
             <div class='py-2'>
-                <h2 class='text-red-500'>Objective</h2>
+                <h2>Objective</h2>
                 <p class='text-sm'>{{ $subject->objective }}</p>
             </div>
             
             <div class=''>
-                @if( $subject->lab_notes->isEmpty() )
+                @if( is_null($lab_note) )
                     <div class='py-2'>
                         <a href='/create/note/subject-{{ $subject->id }}'>
                             Create a new note
@@ -55,21 +54,21 @@
                     </div> 
                 @else
                     <div class='py-2'>
-                        @if( isset($subject->lab_note()->preparation) )
+                        @if( isset($lab_note->preparation) )
                             <h2>Preparation</h2>
-                            <p class='text-sm'>{{ $subject->lab_note()->preparation }}</p>
+                            <p class='text-sm'>{{ $lab_note->preparation }}</p>
                         @endif
                     </div>
                     <div class='py-2'>
-                        @if( isset($subject->lab_note()->methods) )
+                        @if( isset($lab_note->methods) )
                             <h2>Methods</h2>
-                            <p class='text-sm'>{{ $subject->lab_note()->methods }}</p>
+                            <p class='text-sm'>{{ $lab_note->methods }}</p>
                         @endif
                     </div>
                     <div class='py-2'>
-                        @if( isset($subject->lab_note()->updated_at) )
+                        @if( isset($lab_note->updated_at) )
                             <h2>Updated</h2>
-                            <p class='text-sm'>{{ $subject->lab_note()->updated_at }}</p>
+                            <p class='text-sm'>{{ $lab_note->updated_at }}</p>
                         @endif
                     </div>
                     <div class='py-2'>
@@ -79,15 +78,15 @@
                     </div> 
                 @endif
             </div>
-        </div1>
+        </div>
         
-        <div className="col-span-1">
+        <div>
             <div class='py-2'>
                 <a href='/projects/{{ $subject->project->id }}'>
                     Return to the project
                 </a>
             </div>
-        </div1>
+        </div>
     </div>
 
 </x-app-layout>

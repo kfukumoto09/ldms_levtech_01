@@ -5,6 +5,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LabNoteController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TestController;
 
 /*
@@ -48,6 +49,12 @@ Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);
 
 // edit
 Route::get('/edit/note/subject-{subject}', [LabNoteController::class, 'edit']);
+
+// search
+Route::get('/search', [SearchController::class, 'search'])
+            ->name('search');
+Route::get('/search/results', [SearchController::class, 'find'])
+            ->name('search.results');
 
 // users
 // Route::get('/users/register', [UserController::class, 'create']);
