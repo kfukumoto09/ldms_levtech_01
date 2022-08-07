@@ -11,6 +11,9 @@ class Subject extends Model
 {
     use HasFactory;
     
+    /*
+     * Relationships
+     */
     public function project() 
     {
         return $this->belongsTo(Project::class);
@@ -25,5 +28,23 @@ class Subject extends Model
     {
         return $this->lab_notes->last();
     }
+    
+    /*
+     * Searching
+     */
+    
+    public function search($input)
+    {
+        $subjects = Subject::with(['lab_notes', 'project'])->get();
+        dd( $subjects->first()->lab_note()->where('methods', 'LIKE', $input['words'])->get() );
+        $results = $subjects->first()
+                            ->lab_note()
+                            ->where('methods', 'LIKE', $input['words'])
+                            ->get();
+        // dd($results);
+        return $results;
+    }
+    
+    
 }
 

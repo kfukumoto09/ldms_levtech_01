@@ -38,11 +38,7 @@ class SearchController extends Controller
     {
         $input = $request['search'];
         $lab_notes = LabNote::with('subject.project')->get();
-        $subjects = Subject::with('lab_notes')->get();
-        // dd( $test->first()->lab_note() );
-        // dd ($lab_notes);
-        $results = $subjects->first()->lab_note()->where('methods', 'LIKE', $input['words'])->get();
-        // dd($results);
+        $results = (new Subject)->search($input);
         return view('search.results', compact('results'));
     }
 
