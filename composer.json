@@ -46,11 +46,10 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        
         // 追加 from: https://qiita.com/mumucochimu/items/f233d6f6347747dde7f2
-        "compile": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ]
+        // "compile": [
+            // "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        // ]
     },
     "extra": {
         "laravel": {
