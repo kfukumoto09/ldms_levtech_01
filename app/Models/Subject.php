@@ -36,16 +36,16 @@ class Subject extends Model
     public function search($input)
     {
         // 全角スペースを半角に変換
-        $keywords_converted = mb_convert_kana($search, 's');
-        $arr_keywords = explode(' ', $keywords_tmp);
-
+        // dd($input['words']);
+        $keywords_converted = mb_convert_kana($input['words'], 's');
+        $arr_keywords = explode(' ', $keywords_converted);
         $query = Subject::query();
         // dd($query);
         $subjects = Subject::with(['lab_notes', 'project'])->get();
-        dd( $subjects );
+        // dd( $subjects );
         $results = $subjects->first()
                             ->lab_note()
-                            ->where('methods', 'LIKE', $input['words'])
+                            ->where('methods', 'LIKE', '%' . $input['words'] . '%')
                             ->get();
         // dd($results);
         return $results;
