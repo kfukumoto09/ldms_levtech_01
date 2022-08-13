@@ -43,6 +43,8 @@ Route::get('/subjects/{subject}', [SubjectController::class, 'show'])
             ->name('subjects.show');
 
 // create
+Route::get('/create/project', [ProjectController::class, 'create']);
+Route::post('/create/project', [ProjectController::class, 'store']);
 Route::get('/create/note/subject-{subject}', [LabNoteController::class, 'create']);
 Route::post('/create/note/subject-{fukumoto}', [LabNoteController::class, 'store']);
 Route::get('/mypage', [UserController::class, 'mypage'])->middleware(['auth']);
@@ -55,12 +57,11 @@ Route::get('/search', [SearchController::class, 'search'])
             ->name('search');
 Route::get('/search/results', [SearchController::class, 'find'])
             ->name('search.results');
-
 // users
 // Route::get('/users/register', [UserController::class, 'create']);
-Route::get('/users/authorize', [UserController::class, 'edit_player']);
+Route::get('/users/authorize-projects', [UserController::class, 'authorize_projects']);
 // Route::post('/users', [UserController::class, 'update_player']);
-Route::post('/users/{user_id}', [UserController::class, 'update_player']);
+Route::post('/users/authorize-projects', [UserController::class, 'update_authorization']);
 Route::get('/users/{user}', [UserController::class, 'show'])->name('usersmy');
 
 // console

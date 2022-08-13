@@ -12,6 +12,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+        <script src="https://unpkg.com/flowbite@1.5.1/dist/datepicker.js"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -19,13 +21,13 @@
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">  <!-- class="max-w-7xl" を削除した -->
                     {{ $header }}
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main class="text-gray">
+            <main class="text-gray mx-auto py-6 px-4 sm:px-6 lg:px-8">  <!-- class="max-w-7xl" を削除した -->
                 {{ $slot }}
             </main>
         </div>

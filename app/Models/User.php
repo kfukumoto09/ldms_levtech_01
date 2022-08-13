@@ -83,6 +83,19 @@ class User extends Authenticatable
         // };
     }
     
+    /*
+     * Administrator: all projects
+     * Others: authorized projects
+     */
+    public function projects()
+    {
+        if (Gate::allows('isAdministrator')) {
+            return Project::all();
+        } else {
+            return $this->authorized_projects;
+        };
+    }
+    
     /**
      * Functions passed to the controller
      */

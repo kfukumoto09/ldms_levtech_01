@@ -14,7 +14,7 @@ class ProjectController extends Controller
 {
     public function index(Project $project, User $user) 
     {
-        return view('projects/index')->with(['projects' => \Auth::user()->authorized_projects,
+        return view('projects/index')->with(['projects' => \Auth::user()->projects(),
                                             'user' => $user]);
     }
     
@@ -25,7 +25,7 @@ class ProjectController extends Controller
     
     public function create()
     {
-        return view('projects/create-project');
+        return view('create/project');
     }
     
     public function store(Request $request, Project $project)
@@ -42,9 +42,8 @@ class ProjectController extends Controller
         $ls_intermediate = ["project_id" => $project->id, 
                             "user_id" => \Auth::user()->id];
         $project_user = ProjectUser::create($ls_intermediate);
-        //$project_user->fill($ls_intermediate)->save();
         
-        return redirect('index');
+        return redirect('projects/index');
     }
     
     public function destroy(Project $project)

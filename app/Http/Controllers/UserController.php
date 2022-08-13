@@ -12,16 +12,22 @@ use Gate;
 
 class UserController extends Controller
 {
-    public function edit_player()
+    /*
+     * View for authorizing projects to a user
+     */
+    public function authorize_projects()
     {
         Gate::authorize('higherThanManager');
         $user = \Auth::user();
-        return view('projects/authorize')
+        return view('users/authorize-projects')
             ->with(['projects' => $user->authorized_projects,
                     'users' => $user->authorizing_users]);
     }
     
-    public function update_player(Request $request)
+    /*
+     * Update authorization of projects to a user
+     */
+    public function update_authorization(Request $request)
     {
         Gate::authorize('higherThanManager');
         foreach ( $request->project_ids as $project_id ) {
@@ -29,7 +35,7 @@ class UserController extends Controller
                                 "user_id" => (int) $request->updated_user_id,
                                 "authorized_by" => \Auth::user()->id]);
         }
-        return redirect('index');
+        return redirect('projects/index');
     }
     
     // public function create()

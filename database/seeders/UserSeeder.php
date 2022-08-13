@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
             'name' => 'Player #1',
-            'login_id' => 'player0001',
             'email' => 'test1@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 1,
@@ -28,7 +27,6 @@ class UserSeeder extends Seeder
             'updated_at' => new DateTime(),
                 ], [
             'name' => 'Manager #2',
-            'login_id' => 'manger001',
             'email' => 'test2@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 2,
@@ -37,7 +35,6 @@ class UserSeeder extends Seeder
             'updated_at' => new DateTime(),
                 ], [
             'name' => 'SYSETM MASTER',
-            'login_id' => 'admin01',
             'email' => 'test3@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 3,
@@ -46,7 +43,6 @@ class UserSeeder extends Seeder
             'updated_at' => new DateTime(),
                 ], [
             'name' => 'Player #2',
-            'login_id' => 'player0002',
             'email' => 'test4@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 1,
