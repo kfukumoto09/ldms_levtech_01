@@ -11,7 +11,7 @@
     <div class='py-1'>
         @can('higherThanManager')
             <div>
-               <a href="/users/authorize-projects">Authorize projects for users</a>
+               <a href="/users/player/authorize-projects">Authorize projects for players</a>
             </div> 
         @endcan
     </div>

@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
                 ], [
-            'name' => 'Manager #2',
+            'name' => 'Manager #1',
             'email' => 'test2@test.jp',
             'password' => bcrypt('huxG4oLLR@oADE'),
             'user_category_id' => 2,

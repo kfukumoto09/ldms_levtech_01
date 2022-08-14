@@ -54,6 +54,10 @@ class User extends Authenticatable
         return UserCategory::where('name', $key)->first()->id;
     }
     
+    function isAdministrator() {
+        return $this->category->name == 'administrator';
+    }
+    
     /**
      * Relationships
      */
@@ -66,6 +70,10 @@ class User extends Authenticatable
         }
     }
     
+    public function authorized_by() {
+        return $this->belongsTo(User::class, 'authorizer_id', 'id');
+    }
+    
     public function category()
     {
         return $this->belongsTo(UserCategory::class, 'user_category_id');
@@ -74,22 +82,15 @@ class User extends Authenticatable
     public function authorized_projects()
     {
         return $this->belongsToMany(Project::class);
-        // dd($this->belongsToMany(Project::class));
-        // if (Gate::allows('isAdministrator')) {
-        //     dd(User::all());
-        //     return User::all();
-        // } else {
-        //     return $this->belongsToMany(Project::class);
-        // };
     }
     
-    /*
+    /**
      * Administrator: all projects
      * Others: authorized projects
      */
     public function projects()
     {
-        if (Gate::allows('isAdministrator')) {
+        if ( $this->isAdministrator() ) {
             return Project::all();
         } else {
             return $this->authorized_projects;
@@ -100,7 +101,6 @@ class User extends Authenticatable
      * Functions passed to the controller
      */
     public function administrators() {
-        
         return $this->where('user_category_id', $this->category_id('administrator'))
                     ->get();
     }
@@ -114,10 +114,7 @@ class User extends Authenticatable
         return $this->where('user_category_id', $this->category_id('player'))
                     ->get();
     }
-    
-    public function authorized_by() {
-        return $this->belongsTo(User::class, 'authorizer_id', 'id');
-    }
+
     
     public function count() {
         return $this->count();
