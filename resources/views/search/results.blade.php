@@ -9,7 +9,7 @@
     
     <!--Body-->
     
-    <div class='max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
+    <div class=''>
         
         <div class='py-2'>
             <!--<h2>Results</h2>-->

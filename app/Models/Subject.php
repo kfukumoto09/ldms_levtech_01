@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use App\Models\Project;
 use App\Models\LabNote;
 
@@ -11,7 +12,7 @@ class Subject extends Model
 {
     use HasFactory;
     
-    /*
+    /**
      * Relationships
      */
     public function project() 
@@ -29,28 +30,32 @@ class Subject extends Model
         return $this->lab_notes->last();
     }
     
-    /*
-     * Searching
-     */
-    
-    public function search($input)
+    public function last_notes()
     {
-        // 全角スペースを半角に変換
-        // dd($input['words']);
-        $keywords_converted = mb_convert_kana($input['words'], 's');
-        $arr_keywords = explode(' ', $keywords_converted);
-        $query = Subject::query();
-        // dd($query);
         $subjects = Subject::with(['lab_notes', 'project'])->get();
-        // dd( $subjects );
-        $results = $subjects->first()
-                            ->lab_note()
-                            ->where('methods', 'LIKE', '%' . $input['words'] . '%')
-                            ->get();
-        // dd($results);
-        return $results;
+        dd ( Subject::where('objective', 'method')->get() );
+        $lab_notes_dst = Collection::make();
+        foreach( $subjects as $subject ) {
+            $lab_notes_dst->add( $subject->lab_note());
+        }
+        return $lab_notes_dst;
     }
     
+    /**
+     * Searching
+     */
+    public function search($input)
+    {
+        $keywords_converted = mb_convert_kana($input['words'], 's');  // convert double-byte space to single-byte space
+        $arr_keywords = explode(' ', $keywords_converted);
+        $query = Subject::query();
+        // dd($query)
+        $lab_notes = $this->last_notes();
+        dd( $lab_notes->where('methods', 'LIKE', '%' . $input['words'] . '%') );
+        dd( $this->first()->lab_note()->where('methods', 'LIKE', '%' . $input['words'] . '%') );
+        $results = $lab_notes->where('methods', 'LIKE', '%' . $input['words'] . '%');
+        return $results;
+    }
     
 }
 

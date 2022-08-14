@@ -10,20 +10,24 @@
     <!--Body-->
     <div>
         <p>Account status:</p>
-        <p>- {{ $user->category->name }}'s authority </p>
-        <p>- {{ $user->authorized_projects->count() }} authorized projects.</p>
-        @if( $user->category->name == 'player' )
-            <p>- managed by {{ $user->authorized_by->name }} </p>
-        @elseif ( $user->category->name == 'manager' )
-            <p>- authorized by {{ $user->authorized_by->name }}</p>
+        <p>- {{ $category->name }}'s authority </p>
+        <p>- {{ $projects->count() }} authorized projects.</p>
+        @if( isset( $authorizing_user ) )
+            @if( $category->name == 'player' )
+                <p>- managed by {{ $authorizing_user->name }} </p>
+            @elseif ( $category->name == 'manager' )
+                    <p>- authorized by {{ $authorizing_user->name }}</p>
+            @endif
+        @else
+            <p>- no one authorizes this user.</p>
         @endif
     </div>
 
     
     <div class='py-2'>
-        <h2>Authorized projects(s)</h2>
+        <h2>Authorized project(s)</h2>
         <div class="py-1">
-            @each('components.ldms.project', $user->authorized_projects, 'project')
+            @each('components.ldms.project', $projects, 'project')
         </div>
     </div>
     
