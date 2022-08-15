@@ -14,9 +14,9 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search(Request $request)
     {
-        return view('search.search');
+        return view('search.search')->with(['input' => $request]);
     }
 
     /**
@@ -30,6 +30,6 @@ class SearchController extends Controller
         $input = $request['search'];
         // $lab_notes = LabNote::with('subject.project')->get();
         $results = (new Subject)->search($input);
-        return view('search.results', compact('results'));
+        return view('search.results', compact('results', 'input'));
     }
 }
