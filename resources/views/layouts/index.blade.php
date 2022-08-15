@@ -1,82 +1,75 @@
 <x-app-layout>
     
-    <!--head-->
-
-    
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Index
+            @yield('title')
         </h2>
     </x-slot>
     
     
     <!--Body-->
     
-    <!-- Index -->
-    <div class="grid grid-cols-3">
-        <!-- Left bar | project list -->
-        <div class='py-2'>
-            <h2 class="text-gray-600">Projects</h2>
+    <div class="grid grid-cols-3 gap-10">
+        <!--Left | subject list-->
+        <div>
+            
+            <!--Headline-->
+            <div class="py-2">
+                <h1 class="text-gray-600">Projects</h1>
+            </div>
+            
+            <!--List of projects-->
             <div class='my-2'>
-                <div class='py-2 leading-tight'>
-                    <script>
-                        var array_project_id = [];
-                    </script>
-                    @foreach( $projects as $project)
-                        
-                        <input type="button" value="{{ $project->title }}" onclick="clickBtn1()" class='text-gray-700 font-semibold text-sm' />
-                        
-                        <!--Show only when the project title was clicked -->
-                        <div id="show_project_{{ $project->id }}">
-                            <p class='text-xs'>{{ $project->updated_at }}
-                                @foreach( $project->subjects as $subject )
-                                    <div class="py-1 mx-4">
-                                        <h4>{{ $subject->title }}</h4>
-                                        <!--<p class='text-xs'>{{ $subject->updated_at }}                                -->
+                <div class='leading-tight'>
+                    @foreach( $projects_all as $project_tmp )
+                        <div class="py-2">
+                            <!--Project title-->
+                            <div class="">
+                                <a href="/projects/{{ $project_tmp->id }}">
+                                    <h3 class="text-gray-700 font-semibold">{{ $project_tmp->title }}</h3>
+                                </a>
+                            </div>
+                            
+                            <!--Show details of the related project -->
+                            @if( $project_tmp->id == $project->id )
+                                <div class="">
+                                    
+                                    <!--Date on which the project was created-->
+                                    <div>
+                                        <p class='py-1 text-xs'>Created on: {{ $project->updated_at }}</p>
                                     </div>
-                                @endforeach
-                        </div>  <!--Show only when the project title was clicked -->
-                        <script>
-                            // Hidden at first
-                            array_project_id.push("show_project_" + "{{ $project->id }}");
-                            var number = {{ $project->id }} -1;
-                            console.log("project_id: " + {{ $project->id }});
-                            console.log("number: " + number);
-                            console.log("id: " + array_project_id[number]);
-                            document.getElementById(array_project_id[number]).style.display ='none';
-                            
-                            function clickBtn1(){
-                            	const show = document.getElementById(array_project_id[number]);
-                            
-                            	if(show.style.display=='block'){
-                            		// none = Hidden
-                            		show.style.display ='none';
-                            	}else{
-                            		// block = show
-                            		show.style.display ='block';
-                            	}
-                            }
-                        </script>
+                                    
+                                    <!--List of the subjects-->
+                                    <div class="py-1">
+                                        @foreach( $project_tmp->subjects as $subject_tmp )
+                                            <div class="mb-1 mx-4">
+                                                <a href="/subjects/{{ $subject_tmp->id }}">
+                                                    <h4 class="text-sm">- {{ $subject_tmp->title }}</h4>
+                                                    @if( isset( $subject_tmp->lab_note()->performed_on ) )
+                                                        <p class='text-xs text-gray-700'>   {{ $subject_tmp->lab_note()->performed_on }}</p>
+                                                    @endif
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    
+                                </div>  
+                            @endif  <!--Show details of the related project -->
+                        </div>
                     @endforeach
                 </div>
-                {{-- @each('components.ldms.project', $projects, 'project') --}}
-            </div>
-        </div>
+            </div> <!--List of projects-->
+        </div> <!--Left-->
         
-        <!-- Main contents -->
-        <div>
+        <!--Right | detail of a subject-->
+        <div class="col-span-2">
             @yield('contents')
-        </div>
-    </div>
-    
-    <hr>
-    
-    <!-- footer -->
-    <div class="py-2">
-        @yield('footer')
-    </div>
-    
+        </div> <!--right-->
+    </div> <!--grid-->
+
 </x-app-layout>
+
+
 
 
 {{--
