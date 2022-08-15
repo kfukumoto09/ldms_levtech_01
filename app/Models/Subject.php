@@ -66,24 +66,29 @@ class Subject extends Model
         $query = $query->whereHas('project.users', function ($query) use ($user) {
                             $query->authorized($user);
                         });
+                        
         // [2] Date
         $query = $query->whereHas('lab_notes', function ($query) use ($input) {
                                 $query->dateFrom($input['from'])  // [2-1] (date >= from)
                                       ->dateTo($input['to']);     // [2-2] AND (date <= to)
                         });
         
-        // [3] Key words (複数キーワード間は AND検索、検索対象のtitle, objective, lab_note間は OR検索)
+        // [3] Key words (複数キーワード間は AND検索、検索対象のsubject (title/objective), lab_note (preparation/methods) 間は OR検索)
         $query = $query->where(function ($query) use ($input) {
+                            // Pre-processing
                             $words_converted = mb_convert_kana($input['words'], 's');   // -- convert double-byte space to single-byte space
                             $arr_words = explode(' ', $words_converted);                // -- separate words with " "
+                            
+                            // Main-loop
                             foreach( $arr_words as $word ) {                            // [3-n] (word(1) AND word(2) AND ...) {
-                                $query = $query->searchWord($word)                                          // [3-n-1] (contains word(n) in Subject) 
+                                $query = $query->searchWord($word)                                              // [3-n-1] (contains word(n) in Subject) 
                                                 ->orWhereHas('lab_notes', function ($query) use ($word) {   // 
                                                     $query->searchWords($word);                             // [3-n-2] OR (contains word(n) in LabNote)
-                                                });
+                                });
                             }
                         });
                         
+        // Post-processing
         $results = $query->get();
         return $results;
         
@@ -103,7 +108,7 @@ class Subject extends Model
         //                                                 $query->searchWords($word);                       // [4-n-2] OR (contains word(n) in LabNote)
         //                                             });                                     //
         //                         }                                                           // }  <!-- [4-n] word(n) -->
-        //                     })->get();                                                  // })  <!-- [4] contains word -->
+        //                     })->get();                                                  // })  <!-- [4] contains key word -->
         // $results = $subjects
         // return $results;
     }

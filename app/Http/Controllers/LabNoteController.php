@@ -32,10 +32,7 @@ class LabNoteController extends Controller
         if ( is_null($last_note) )  {
             $last_note = $lab_note;
         }
-        return view('create.lab-note')->with(['lab_note' => $lab_note,
-                                            'subject' => $subject,
-                                            'project' => $project,
-                                            'last_note' => $last_note]);
+        return view('create.lab-note', compact('lab_note', 'subject', 'project', 'last_note'));
     }
 
     /**
