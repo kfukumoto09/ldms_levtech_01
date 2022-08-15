@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\LabNoteController;
 use App\Http\Controllers\SearchController;

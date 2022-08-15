@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class ProjectUser extends Model
 {
@@ -16,7 +17,6 @@ class ProjectUser extends Model
     ];
     
     protected $table = 'project_user';  // defaultではproject_users_tableになるため、手動で変更
-    
     public $timestamps = false;  // 入れていないと、ProjectUser::createやfillをしたときにエラーが出る。
     
     /**

@@ -43,7 +43,7 @@
             <!--Datepicker-->
             <div class='py-2'>
                 <label for='date'><h2>Date</h2></label>
-                <div inline-datepicker data-date={{ date('m/d/y') }} name='lab_note[performed_at]' id='date'></div>
+                <div inline-datepicker data-date={{ date('yyyy-mm-dd') }} name='lab_note[performed_on]' id='date'></div>
             </div>
             
             <!--Hidden: subject_id-->

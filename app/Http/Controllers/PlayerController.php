@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProjectUser;
 use App\Models\User;
 use Gate;
 
@@ -13,7 +14,7 @@ class PlayerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function authorize_projects()
+    public function edit_authorization()
     {
         Gate::authorize('higherThanManager');
         $user = \Auth::user();
@@ -29,7 +30,7 @@ class PlayerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update_authorization($id, Request $request)
+    public function update_authorization(Request $request)
     {
         Gate::authorize('higherThanManager');
         foreach ( $request->project_ids as $project_id ) {
