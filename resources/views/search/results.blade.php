@@ -18,7 +18,7 @@
                 @else
                     <div class=''>
                         @foreach( $results as $result)
-                            @include('components.ldms.subject', ['subject' => $result->subject])
+                            @include('components.ldms.subject', ['subject' => $result])
                         @endforeach
                     </div>
                 @endif

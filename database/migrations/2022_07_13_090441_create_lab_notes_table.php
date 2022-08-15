@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('subject_id')->constrained('subjects');
             $table->string('preparation')->nullable();
             $table->string('methods');
-            $table->date('performed_at')->nullable();
+            $table->date('performed_on');
             $table->timestampsTz();
             $table->softDeletesTz($column = 'deleted_at');
         });

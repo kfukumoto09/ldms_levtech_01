@@ -2,7 +2,7 @@
     
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Authorize projects to a user
+            Authorize projects to a player
         </h2>
     </x-slot>
     
@@ -10,7 +10,7 @@
     <!--Body-->
 
     <div class="container">
-        <form id="authorize", action="/users/authorize-projects" method="POST" class="row">
+        <form id="authorize", action="/users/player/authorize-projects" method="POST" class="row">
             @csrf
 
             <div class="py-2">

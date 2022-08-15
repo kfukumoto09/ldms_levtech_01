@@ -100,24 +100,40 @@ class User extends Authenticatable
     /**
      * Functions passed to the controller
      */
-    public function administrators() {
+    public function administrators() 
+    {
         return $this->where('user_category_id', $this->category_id('administrator'))
                     ->get();
     }
     
-    public function managers() {
+    public function managers() 
+    {
         return $this->where('user_category_id', $this->category_id('manager'))
                     ->get();
     }
     
-    public function players() {
+    public function players() 
+    {
         return $this->where('user_category_id', $this->category_id('player'))
                     ->get();
     }
 
-    
     public function count() {
         return $this->count();
+    }
+    
+    /**
+     * [Scope] return authorized items
+     * Administrator: all
+     * Others: authorized
+     */
+    public function scopeAuthorized($query, $user)
+    {
+        if ( $user->isAdministrator() ) {
+            return $query;
+        } else {
+            return $query->where('id', $user->id);
+        };
     }
     
     

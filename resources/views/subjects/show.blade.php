@@ -67,6 +67,12 @@
                     </div>
                     <div class='py-2'>
                         @if( isset($lab_note->updated_at) )
+                            <h2>Performed</h2>
+                            <p class='text-sm'>{{ $lab_note->performed_on }}</p>
+                        @endif
+                    </div>
+                    <div class='py-2'>
+                        @if( isset($lab_note->updated_at) )
                             <h2>Updated</h2>
                             <p class='text-sm'>{{ $lab_note->updated_at }}</p>
                         @endif
