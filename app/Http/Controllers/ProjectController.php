@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 // use App\Http\Requests\ProjectRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\ProjectUser;
@@ -16,11 +15,7 @@ class ProjectController extends Controller
 {
     public function index(Project $project) 
     {
-        $user = Auth::user();
-        $projects_all = Project::with(['users', 'subjects', 'subjects.lab_notes'])
-                            ->whereHas('users', function ($query) use ($user) {
-                                $query->where('id', $user->id);  // get authorized projects
-                            })->get();
+        $projects_all = $project->getAuthorizedProjects();
         $subject = new Subject;
         $lab_note = $subject->lab_note();
         return view('projects/index', compact('projects_all', 'project', 'subject', 'lab_note'));
