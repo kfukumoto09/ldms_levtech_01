@@ -20,6 +20,23 @@ class ProjectUser extends Model
     public $timestamps = false;  // 入れていないと、ProjectUser::createやfillをしたときにエラーが出る。
     
     /**
+     * 
+     */
+    public function authorize($user_id, $project_ids) 
+    {
+        foreach ( $project_ids as $project_id_str ) {
+            $project_id = (int) $project_id_str;
+            
+            $result = $this->search($project_id, $user_id)->first(); 
+            if( is_null($result) ) {
+                ProjectUser::create(["project_id" => $project_id, 
+                                    "user_id" => $user_id,
+                                    "authorized_by" => \Auth::user()->id]);
+            }
+        }
+    }
+    
+    /**
      * Search (project_id, user_id) in project_user_table
      */
     public function search($project_id, $user_id) {

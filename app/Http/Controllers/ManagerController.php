@@ -35,17 +35,7 @@ class ManagerController extends Controller
     {
         Gate::authorize('isAdministrator');
         $user_id = (int) $request->updated_user_id;
-        
-        foreach ( $request->project_ids as $project_id_int ) {
-            $project_id = (int) $project_id_int;
-            
-            $result = $project_user->search($project_id, $user_id)->first(); 
-            if( is_null($result) ) {
-                ProjectUser::create(["project_id" => $project_id, 
-                                    "user_id" => $user_id,
-                                    "authorized_by" => \Auth::user()->id]);
-            }
-        }
+        $project_user->authorize($user_id, $request['project_ids']);
         return redirect('console');
     }
 }
