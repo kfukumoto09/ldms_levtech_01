@@ -19,7 +19,7 @@ class PlayerController extends Controller
         Gate::authorize('higherThanManager');
         $user = \Auth::user();
         return view('users/authorize-to-player')
-            ->with(['projects' => $user->authorized_projects,
+            ->with(['projects' => $user->projects(),
                     'users' => $user->authorizing_users]);
     }
     
@@ -28,7 +28,7 @@ class PlayerController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response    
      */
     public function update_authorization(Request $request)
     {

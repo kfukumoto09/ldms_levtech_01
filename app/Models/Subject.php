@@ -112,6 +112,5 @@ class Subject extends Model
         // $results = $subjects
         // return $results;
     }
-    
 }
 

@@ -35,7 +35,7 @@
                 
                 <!-- Navigation Links --> <!-- Manually wrote -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="/index" :active="request()->routeIs('subjects.*')">
+                    <x-nav-link href="/projects/index" :active="request()->routeIs('subjects.*')">
                         {{ __('(subject)') }}
                     </x-nav-link>
                 </div>
