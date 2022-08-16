@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Subject;
 
@@ -26,10 +27,14 @@ class Project extends Model
         return $this->hasMany(Subject::class);
     }
     
-    public function getAuthorizedProjects(Project $project, User $user)
+    public function getAuthorizedProjects()
     {
-        dd(Project::where('authorized_users'));
-        return Project::where('authorized_users');
+        $user = Auth::user();
+        $projects = Project::with(['users', 'subjects', 'subjects.lab_notes'])
+                            ->whereHas('users', function ($query) use ($user) {
+                                $query->authorized($user);  // get authorized projects
+                            })->get();
+        return $projects;
     }
     
 }
