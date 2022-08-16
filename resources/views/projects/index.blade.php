@@ -1,6 +1,19 @@
 @extends('layouts.index')
 
-@section('footer')
+@section('title')
+    Project index
+@endsection
+
+@section('contents')
+    
+    <div class="py-2">
+        <p class="text-gray-500">--------------------------------------
+
+The contents were displayed here.
+
+--------------------------------------
+        </p>
+    </div>
 
     <!--Link for creating a new project-->
     <div class='py-1'>

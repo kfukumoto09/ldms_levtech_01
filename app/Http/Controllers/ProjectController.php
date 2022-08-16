@@ -5,22 +5,38 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 // use App\Http\Requests\ProjectRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\ProjectUser;
+use App\Models\Subject;
 use Gate;
 
 class ProjectController extends Controller
 {
-    public function index(Project $project, User $user) 
+    public function index(Project $project) 
     {
-        return view('projects/index')->with(['projects' => \Auth::user()->projects(),
-                                            'user' => $user]);
+        $user = Auth::user();
+        $projects_all = Project::with(['users', 'subjects', 'subjects.lab_notes'])
+                            ->whereHas('users', function ($query) use ($user) {
+                                $query->where('id', $user->id);  // get authorized projects
+                            })->get();
+        $subject = new Subject;
+        $lab_note = $subject->lab_note();
+        return view('projects/index', compact('projects_all', 'project', 'subject', 'lab_note'));
     }
     
     public function show(Project $project) 
     {
-        return view('projects/show')->with(['project' => $project]);
+        $user = Auth::user();
+        $projects_all = Project::with(['users', 'subjects', 'subjects.lab_notes'])
+                            ->whereHas('users', function ($query) use ($user) {
+                                $query->where('id', $user->id);  // get authorized projects
+                            })->get();
+        $subjects = $project->subjects;
+        $subject = new Subject;
+        $lab_note = $subject->lab_note();
+        return view('projects/show', compact('projects_all', 'project', 'subjects', 'subject', 'lab_note'));
     }
     
     public function create()
@@ -43,7 +59,7 @@ class ProjectController extends Controller
                             "user_id" => \Auth::user()->id];
         $project_user = ProjectUser::create($ls_intermediate);
         
-        return redirect('projects/index');
+        return redirect('projects/'. $project->id);
     }
     
     public function destroy(Project $project)
